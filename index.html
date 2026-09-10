@@ -1,4 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help - Tutor Inteligente</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 500px;
+            height: 90vh;
+            background-color: #1e293b;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .chat-header {
+            padding: 15px;
+            background-color: #0f172a;
+            border-bottom: 1px solid #334155;
+            text-align: center;
+        }
+
+        .chat-header h1 {
+            font-size: 1.2rem;
+            color: #38bdf8;
+        }
+
+        .chat-header p {
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            padding: 10px 14px;
+            border-radius: 10px;
+            max-width: 80%;
+            line-height: 1.4;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+        }
+
+        .bot-message {
+            background-color: #334155;
+            color: #f8fafc;
+            align-self: flex-start;
             border-bottom-left-radius: 2px;
+        }
+
+        .user-message {
+            background-color: #0284c7;
+            color: #ffffff;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
         }
 
         .chat-input-area {
@@ -59,8 +141,8 @@
     </div>
 
     <script>
-        // Cole sua chave dentro das ashas abaixo
-        const API_KEY = "AQ.Ab8RN6KgkxOc7UIyDQzAWyYnPCEbvV-W380YLfjxhN4JkvZMhg")"; 
+        // Chave de API configurada
+        const API_KEY = "AQ.Ab8RN6KgkxOc7UIyDQzAWyYnPCEbvV-W380YLfjxhN4JkvZMhg"; 
 
         async function sendMessage() {
             const inputField = document.getElementById('userInput');
@@ -124,3 +206,4 @@
     </script>
 </body>
 </html>
+
