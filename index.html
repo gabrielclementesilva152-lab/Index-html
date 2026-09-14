@@ -141,6 +141,9 @@
     </div>
 
     <script>
+        // Memória da conversa: guarda o histórico completo das mensagens
+        const chatHistory = [];
+
         async function sendMessage() {
             const inputElement = document.getElementById('userInput');
             const messageText = inputElement.value.trim();
@@ -148,16 +151,25 @@
             if (!messageText) return;
 
             inputElement.value = '';
+            
+            // 1. Exibe a mensagem do usuário na tela
             appendMessage(messageText, 'user-message');
 
+            // 2. Salva a mensagem no histórico de memória
+            chatHistory.push({
+                role: 'user',
+                parts: [{ text: messageText }]
+            });
+
+            // 3. Exibe a animação "Help está pensando..."
             const loadingId = appendMessage("Help está pensando...", 'bot-message');
 
             try {
-                // Chama a rota interna /api/chat que a Vercel gerencia
+                // Envia todo o histórico da conversa para a rota /api/chat
                 const response = await fetch('/api/chat', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: messageText })
+                    body: JSON.stringify({ messages: chatHistory })
                 });
 
                 const data = await response.json();
@@ -169,7 +181,15 @@
 
                 if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
                     const botReply = data.candidates[0].content.parts[0].text;
+                    
+                    // Atualiza o texto do bot com a resposta real
                     document.getElementById(loadingId).innerText = botReply;
+
+                    // 4. Salva a resposta do tutor na memória da conversa
+                    chatHistory.push({
+                        role: 'model',
+                        parts: [{ text: botReply }]
+                    });
                 } else {
                     document.getElementById(loadingId).innerText = "Não foi possível gerar uma resposta.";
                 }
@@ -203,15 +223,3 @@
     </script>
 </body>
 </html>
-
- 
-
-
- 
- 
-
-
- 
- 
-
-
